@@ -1,14 +1,23 @@
-const { application } = require('express');
 const express = require('express');
+const connectDB = require('./config/server');
+const products = require('./routes/product.route')
+
 
 //Create Server 
 const app = express();
 
-//Create Routes
-app.get('/', (req, res) => {
-    res.send('Project CRUD')
-})
+//Connection a DB
+connectDB();
 
-app.listen(4000, () => {
+// Middleware 
+app.use(express.json());
+app.use('/api/products', require('./routes/product.route'));
+
+//Create Routes Principal
+// app.get('/', (req, res) => {
+//     res.send('Project CRUD')
+// })
+
+app.listen(4200, () => {
     console.log('El servidor funciona')
 })
